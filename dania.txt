@@ -1,0 +1,4 @@
+Pizza 2 8.90
+Makaron 1 15.50
+Zupa 5 28
+Kotlet 3 56.99
