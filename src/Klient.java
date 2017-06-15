@@ -22,7 +22,7 @@ public class Klient extends Osoba {
     {
         Scanner in = new Scanner(System.in);
         System.out.println();
-        System.out.println(imie + " Chce zamowic: ");
+        System.out.print("*"+imie + "* Chce zamowic: ");
         return in.nextLine();
     }
     public void zmniejGotowke(double kwota)
@@ -33,10 +33,6 @@ public class Klient extends Osoba {
         System.out.println("Aktualna ilosc gotowki wynosi: "+ (iloscGotowki+kwota)+" - "+kwota+" = "+iloscGotowki);
     }
 
-    public void odejdzOdStolu(Kelner k) //kelner staje sie wolny
-    {
-        k.setCzyWolny(true);
-    }
 
     public String getImie() {
         return imie;

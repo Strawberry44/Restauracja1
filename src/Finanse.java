@@ -30,7 +30,7 @@ public class Finanse {
         return null;
 
     }
-    public void aktualizujListKlientow()    //zapisuje do pliku txt aktualna tablice klientow
+    public void aktualizujListKlientow()
     {
         fileIO.zapisDoPliku(klientTab, fileNameKlienci);
     }
