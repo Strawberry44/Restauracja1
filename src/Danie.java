@@ -10,9 +10,6 @@ public class Danie {
         return nazwa;
     }
 
-    public double getPorcje() {
-        return porcje;
-    }
 
     public double getCena() {
         return cena;
@@ -20,6 +17,13 @@ public class Danie {
 
     public void setNazwa(String nazwa) {
         this.nazwa = nazwa;
+    }
+
+    @Override
+    public String toString() {
+        return "Nazwa='" + nazwa + '\'' +
+                ", porcje=" + porcje +
+                ", cena=" + cena;
     }
 
     public void setPorcje(double porcje) {

@@ -7,16 +7,42 @@ public class Kelner extends Osoba {
     private int staz;
     private boolean czyWolny;
     private static Kelner[] kelnerTab;
-    private FileIO odczyt;
     private Klient aktualnyKlient;
     private FileIO wczytaj;
     private String fileNameKelnerzy = "kelnerzy.txt";
+
 
     @Override
     public void wypelnij(String...args) {
         imie = args[0];
         staz = Integer.parseInt(args[1]);
         czyWolny = true;
+    }
+    private Kelner znajdzKelnera(String nazwaKel)
+    {
+        for (int i = 0; i < kelnerTab.length; i++) {
+            if(nazwaKel.equals(kelnerTab[i].imie))
+                return kelnerTab[i];
+        }
+        return null;
+    }
+    public void uwolnijKelnera()
+    {
+        Scanner sc = new Scanner(System.in);
+        System.out.print("Wprowadz imie kelnera ktorego chcesz uwolnic: ");
+        String nameKelnera = sc.nextLine();
+        Kelner a = znajdzKelnera(nameKelnera);
+        if(a== null)
+            System.out.println("Nie znaleziono kelnera o podanej nazwie");
+        else if(a.czyWolny == false)
+        {
+            System.out.println("Kelner "+ nameKelnera+ " jest gotowy do obslugi nowych klientow");
+            a.setCzyWolny(true);
+        }
+        else if(a.czyWolny == true)
+        {
+            System.out.println("Kelner "+ nameKelnera+ " nie jest zajety");
+        }
     }
 
     public boolean przyjmijZamowienie(Menu menu, Finanse finanse)
@@ -37,32 +63,33 @@ public class Kelner extends Osoba {
         Scanner in = new Scanner(System.in);
         String imie, nazwisko;
         System.out.println();
-        System.out.println(aktualnyKelner.imie+"| Wprowadz imie klienta: ");
+        System.out.print("*"+aktualnyKelner.imie+"* Wprowadz imie klienta: ");
         imie = in.nextLine();
-        System.out.println(aktualnyKelner.imie+"* Wprowadz nazwisko: ");
+        System.out.print("*"+aktualnyKelner.imie+"* Wprowadz nazwisko: ");
         nazwisko = in.nextLine();
 
         aktualnyKlient = finanse.znajdzKlienta(imie, nazwisko);
         if(aktualnyKlient == null)
         {
-            System.out.println(aktualnyKelner.imie+"* Nie znaleziono w tablicy klientow");
+            System.out.println("*"+aktualnyKelner.imie+"* Nie znaleziono w tablicy klientow");
             return false;
         }
         else
         {
+            menu.wyswietlDania();
             String nazwaWybranegoDania = aktualnyKlient.zamow();
             Danie wybraneDanie;
             wybraneDanie = menu.czyIstnieje(nazwaWybranegoDania);
             if(wybraneDanie == null)
             {
-                System.out.println(aktualnyKelner.imie+"* Nie mamy podanego dania w menu");
+                System.out.println("*"+aktualnyKelner.imie+"* Nie mamy podanego dania w menu");
                 return false;
             }
             else
             {
                 if(wybraneDanie.getCena() > aktualnyKlient.getIloscGotowki())
                 {
-                    System.out.println(aktualnyKelner.imie+"* Nie masz odpowiednio duzo gotowki  koszt:" +wybraneDanie.getCena() +" masz: "+aktualnyKlient.getIloscGotowki());
+                    System.out.println("*"+aktualnyKelner.imie+"* Nie masz odpowiednio duzo gotowki  koszt:" +wybraneDanie.getCena() +" masz: "+aktualnyKlient.getIloscGotowki());
                 }
                 else
                 {
@@ -88,7 +115,7 @@ public class Kelner extends Osoba {
 
     private void podajDanie(String nazwaDania, String nazwaKelnera)
     {
-        System.out.println(nazwaKelnera+" Danie "+nazwaDania+" podane do stolu");
+        System.out.println("*"+nazwaKelnera+"* Danie "+nazwaDania+" podane do stolu");
         System.out.println("Kelner "+nazwaKelnera + " czeka az zaplacisz");
         System.out.println();
     }

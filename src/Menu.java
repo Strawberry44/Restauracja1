@@ -8,11 +8,14 @@ public class Menu {
     private FileIO odczyt;
     public void wyswietlDania()
     {
-        System.out.println();
-        System.out.println("Dostepne dania:");
+        System.out.println("-----------------------");
+        System.out.println("Menu:");
         for (int i = 0; i < danieTab.length; i++) {
-            System.out.println(danieTab[i]);
+            System.out.println(danieTab[i].toString());
         }
+        System.out.println("danieDnia zwraca losowe danie");
+        System.out.println("-----------------------");
+
     }
     public Danie danieDnia()
     {
@@ -25,6 +28,11 @@ public class Menu {
         for (int i = 0; i < danieTab.length; i++) {
             if(nazwa.equals(danieTab[i].getNazwa()))
                 return danieTab[i];
+            else if(nazwa.equals("danieDnia")) {
+                Danie d =  danieDnia();
+                System.out.println("Wylosowano: "+ d.toString());
+                return d;
+            }
         }
         return null;
     }

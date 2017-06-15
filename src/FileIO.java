@@ -10,7 +10,7 @@ public class FileIO {
     private File odczyt;
     private PrintWriter zapis;
 
-    private String fileNameMenu, fileNameKelnerzy, fileNameKlienci;
+    private String fileNameMenu;
 
     public void wczytajOsoby(Osoba[] tab, String path)
     {
@@ -20,8 +20,7 @@ public class FileIO {
             int licznik = 0;
             while(in.hasNextLine())
             {
-                    //if(path == "kelnerzy.txt")
-                        //tab[licznik] = new Kelner();
+
                     String line = in.nextLine();
                     String[] splited = line.split(" ");
 
@@ -72,6 +71,7 @@ public class FileIO {
             for (int i = 0; i < tab.length; i++) {
                 zapis.println(tab[i].toString());
             }
+            System.out.println("Zapisano zmiany");
             zapis.close();
         }
         catch (FileNotFoundException e)
