@@ -3,11 +3,12 @@ import java.util.Scanner;
 /**
  * Created by Grzeg on 12.06.2017.
  */
-public class Klient extends Osoba {
+public class Klient{
+    private String imie;
     private String nazwisko;
     private double iloscGotowki;
 
-    @Override
+
     public void wypelnij(String... args) {
         imie = args[0];
         nazwisko = args[1];
@@ -46,7 +47,4 @@ public class Klient extends Osoba {
         return iloscGotowki;
     }
 
-    public void setIloscGotowki(double iloscGotowki) {
-        this.iloscGotowki = iloscGotowki;
-    }
 }

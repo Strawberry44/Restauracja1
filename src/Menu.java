@@ -1,3 +1,4 @@
+import java.util.NoSuchElementException;
 import java.util.Random;
 
 /**
@@ -23,7 +24,7 @@ public class Menu {
         int temp = rand.nextInt(danieTab.length);
         return danieTab[temp];
     }
-    public Danie czyIstnieje(String nazwa)
+    public Danie czyIstnieje(String nazwa) throws NoSuchElementException
     {
         for (int i = 0; i < danieTab.length; i++) {
             if(nazwa.equals(danieTab[i].getNazwa()))
@@ -34,7 +35,7 @@ public class Menu {
                 return d;
             }
         }
-        return null;
+        throw new NoSuchElementException();
     }
     Menu(final int rozmiar){
         danieTab = new Danie[rozmiar];

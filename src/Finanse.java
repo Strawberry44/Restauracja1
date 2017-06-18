@@ -1,9 +1,11 @@
+import java.util.NoSuchElementException;
+
 /**
  * Created by Grzeg on 12.06.2017.
  */
 public class Finanse {
-    private Klient[] klientTab;
-    //private double cenaZaObiad;
+
+    private Klient[] klientTab; //nie uzywamy kod usuwamy
     private String fileNameKlienci = "klienci.txt";
     private FileIO fileIO;
 
@@ -11,24 +13,22 @@ public class Finanse {
     {
         fileIO = new FileIO();
         klientTab = new Klient[rozmiar];
-        for (int i = 0; i < klientTab.length; i++) {
-            klientTab[i] = new Klient();
-        }
-        fileIO.wczytajOsoby(klientTab, fileNameKlienci);
+
+        fileIO.wczytajKlientow(klientTab, fileNameKlienci);
     }
 
-    public Klient znajdzKlienta(String imie, String nazwisko)
-    {
-        for (int i = 0; i < klientTab.length; i++) {
+    public Klient znajdzKlienta(String imie, String nazwisko) throws NoSuchElementException {
+        for (int i = 0; i < klientTab.length; i++) {//pamietaj o przeciazaniu equlas hashcode
             if(imie.equals(klientTab[i].getImie()))
-            {
-                if(nazwisko.equals(klientTab[i].getNazwisko()))
+            {//klamry
+                if(nazwisko.equals(klientTab[i].getNazwisko())) {
                     return klientTab[i];
+                }
             }
 
         }
-        return null;
-
+        //zwracanie nulla jest slabe
+        throw new NoSuchElementException();
     }
     public void aktualizujListKlientow()
     {
