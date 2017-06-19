@@ -7,30 +7,51 @@ import java.util.Scanner;
  * Created by Grzeg on 14.06.2017.
  */
 public class FileIO {
+
     private File odczyt;
     private PrintWriter zapis;
-
     private String fileNameMenu;
 
-    public void wczytajOsoby(Osoba[] tab, String path)
+    public void wczytajKlientow(Klient[] tab, String path)
     {
         odczyt = new File(path);
         try {
             Scanner in = new Scanner(odczyt);
             int licznik = 0;
             while(in.hasNextLine())
-            {
+            {//puste przestrzenie
+                String line = in.nextLine();
+                String[] splited = line.split(" ");
 
-                    String line = in.nextLine();
-                    String[] splited = line.split(" ");
+                tab[licznik] = new Klient();
+                tab[licznik].wypelnij(splited[0], splited[1], splited[2]);
 
-                    if(splited.length>2)
-                        tab[licznik].wypelnij(splited[0], splited[1], splited[2]);   //tu moze byc error
-                    else
-                        tab[licznik].wypelnij(splited[0], splited[1]);
+                licznik++;
+            }
+        }
+        catch (FileNotFoundException e)
+        {
+            System.out.println("Nie znaleziono pliku: "+ path);
+        }
 
-                    licznik++;
+    }
 
+
+    public void wczytajKelnerow(Kelner[] tab, String path)
+    {
+        odczyt = new File(path);
+        try {
+            Scanner in = new Scanner(odczyt);
+            int licznik = 0;
+            while(in.hasNextLine())
+            {//puste przestrzenie
+                String line = in.nextLine();
+                String[] splited = line.split(" ");
+
+                tab[licznik] = new Kelner();
+                tab[licznik].wypelnij(splited[0], splited[1]);
+
+                licznik++;
             }
         }
         catch (FileNotFoundException e)
@@ -64,7 +85,7 @@ public class FileIO {
 
     }
 
-    public void zapisDoPliku(Osoba[] tab, String path)  //do uaktualniania stanu gotowki klijenta po zamowieniu
+    public void zapisDoPliku(Klient[] tab, String path)  //do uaktualniania stanu gotowki klijenta po zamowieniu
     {
         try {
             zapis = new PrintWriter(path);
@@ -79,7 +100,6 @@ public class FileIO {
             System.out.println("Nie znaleziono pliku: "+ path);
         }
     }
-
     public FileIO() {
         this.fileNameMenu = "dania.txt";
     }
