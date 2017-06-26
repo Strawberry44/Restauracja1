@@ -6,13 +6,13 @@ import java.util.Scanner;
 public class Restauracja {
     private Finanse finanse;
     private Menu menu;
-    private Kelner kelner;
+    private BazaKelnerow bazaKelnerow;
 
     public Restauracja(int rozMenu, int rozKli, int rozKel)
     {
         menu = new Menu(rozMenu);
         finanse = new Finanse(rozKli);
-        kelner = new Kelner(rozKel);
+        bazaKelnerow = new BazaKelnerow(rozKel);
     }
     public void otworz()
     {
@@ -28,9 +28,9 @@ public class Restauracja {
             {
                 wybor = sc.nextInt();
                 if (wybor == 1) {
-                    kelner.przyjmijZamowienie(menu, finanse);
+                    bazaKelnerow.przyjmijZamowienie(menu, finanse);
                 } else if (wybor == 2) {
-                    kelner.uwolnijKelnera();
+                    bazaKelnerow.uwolnijKelnera();
                 } else if (wybor == 3) {
                     finanse.aktualizujListKlientow();
                     break;

@@ -1,6 +1,7 @@
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.PrintWriter;
+import java.util.List;
 import java.util.Scanner;
 
 /**
@@ -37,7 +38,7 @@ public class FileIO {
     }
 
 
-    public void wczytajKelnerow(Kelner[] tab, String path)
+    public void wczytajKelnerow(List list, String path)
     {
         odczyt = new File(path);
         try {
@@ -47,10 +48,9 @@ public class FileIO {
             {//puste przestrzenie
                 String line = in.nextLine();
                 String[] splited = line.split(" ");
-
-                tab[licznik] = new Kelner();
-                tab[licznik].wypelnij(splited[0], splited[1]);
-
+                Kelner k = new Kelner();
+                k.wypelnij(splited[0], splited[1]);
+                list.add(k);
                 licznik++;
             }
         }
