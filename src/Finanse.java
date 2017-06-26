@@ -5,7 +5,7 @@ import java.util.NoSuchElementException;
  */
 public class Finanse {
 
-    private Klient[] klientTab; //nie uzywamy kod usuwamy
+    private Klient[] klientTab;
     private String fileNameKlienci = "klienci.txt";
     private FileIO fileIO;
 
@@ -18,16 +18,14 @@ public class Finanse {
     }
 
     public Klient znajdzKlienta(String imie, String nazwisko) throws NoSuchElementException {
-        for (int i = 0; i < klientTab.length; i++) {//pamietaj o przeciazaniu equlas hashcode
+        for (int i = 0; i < klientTab.length; i++) {
             if(imie.equals(klientTab[i].getImie()))
-            {//klamry
+            {
                 if(nazwisko.equals(klientTab[i].getNazwisko())) {
                     return klientTab[i];
                 }
             }
-
         }
-        //zwracanie nulla jest slabe
         throw new NoSuchElementException();
     }
     public void aktualizujListKlientow()

@@ -13,7 +13,7 @@ public class Kelner {
     private FileIO wczytaj;
     private String fileNameKelnerzy = "kelnerzy.txt";
 
-    public Kelner(final int rozmiar) {// konstruktor na koncu ? przenies na poczatek
+    public Kelner(final int rozmiar) {
         wczytaj = new FileIO();
         kelnerTab = new Kelner[rozmiar];
         for (int i = 0; i < kelnerTab.length; i++) {
@@ -27,7 +27,7 @@ public class Kelner {
 
     }
 
-    public void wypelnij(String... args) {//pomyslalbym nad innym rozwiazaniem
+    public void wypelnij(String... args) {
         imie = args[0];
         staz = Integer.parseInt(args[1]);
         czyWolny = true;
@@ -38,19 +38,19 @@ public class Kelner {
             if (nazwaKel.equals(kelnerTab[i].imie))
                 return kelnerTab[i];
         }
-        //ta sama historia
+
         throw new NoSuchElementException();
     }
 
     public void uwolnijKelnera() {
-        //p
+
         Scanner sc = new Scanner(System.in);
         System.out.print("Wprowadz imie kelnera ktorego chcesz uwolnic: ");
         String nameKelnera = sc.nextLine();
-        Kelner a;
+        Kelner kelner;
 
         try {
-            a = znajdzKelnera(nameKelnera);
+            kelner = znajdzKelnera(nameKelnera);
         }
         catch (NoSuchElementException e)
         {
@@ -58,11 +58,11 @@ public class Kelner {
             return;
         }
 
-        if (a.czyWolny == false) {
+        if (!kelner.czyWolny) {
             System.out.println("Kelner " + nameKelnera + " jest gotowy do obslugi nowych klientow");
-            a.setCzyWolny(true);
+            kelner.setCzyWolny(true);
 
-        } else if (a.czyWolny == true) {
+        } else{
             System.out.println("Kelner " + nameKelnera + " nie jest zajety");
         }
     }
@@ -83,7 +83,8 @@ public class Kelner {
 
 
         Scanner in = new Scanner(System.in);
-        String imie, nazwisko;
+        String imie;
+        String nazwisko;
 
         System.out.println();
         System.out.print("*" + aktualnyKelner.imie + "* Wprowadz imie klienta: ");
@@ -113,7 +114,8 @@ public class Kelner {
         }
 
         if (wybraneDanie.getCena() > aktualnyKlient.getIloscGotowki()) {
-            System.out.println("*" + aktualnyKelner.imie + "* Nie masz odpowiednio duzo gotowki  koszt:" + wybraneDanie.getCena() + " masz: " + aktualnyKlient.getIloscGotowki());
+            System.out.println("*" + aktualnyKelner.imie + "* Nie masz odpowiednio duzo gotowki  koszt:" + //
+                    wybraneDanie.getCena() + " masz: " + aktualnyKlient.getIloscGotowki());
         } else {
             podajDanie(nazwaWybranegoDania, aktualnyKelner.imie);
             aktualnyKelner.czyWolny = false;
@@ -126,11 +128,11 @@ public class Kelner {
 
     private Kelner dajWolnegoKelnera() throws NoSuchElementException {
         for (int i = 0; i < kelnerTab.length; i++) {
-            if (kelnerTab[i].czyWolny == true)
+            if (kelnerTab[i].czyWolny)
                 return kelnerTab[i];
 
         }
-        // popraw
+
         throw new NoSuchElementException();
     }
 
@@ -140,7 +142,6 @@ public class Kelner {
         System.out.println();
     }
 
-    //set i to strin
     public void setCzyWolny(boolean s) {
         czyWolny = s;
     }
